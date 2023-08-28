@@ -27,9 +27,11 @@ export default function Grid(props) {
             if(props.isWon()){ 
                 let num=props.score;
                 if(props.flag){ 
+                    document.getElementById("msg").innerHTML="X won the game"
                     num[0]++; 
                 }
                 else{  
+                    document.getElementById("msg").innerHTML="O won the game"
                     num[1]++;
                 } 
                 props.setScore(num);
@@ -38,13 +40,19 @@ export default function Grid(props) {
                 }, 500);
             } 
             if(draw()){ 
-                setTimeout(() => {
+                document.getElementById("msg").innerHTML="match draw"
+                setTimeout(() => { 
                     props.setMat(Array(9).fill(null));
                 }, 1000)
-            }
+            }  
+            setTimeout(() => {
+                document.getElementById("msg").innerHTML="";
+            }, 1000)
+            
             props.setFlag(!props.flag)
         }
     }
+
     return (
         <div>
             <button style={style} onClick={click}>{props.value}</button>

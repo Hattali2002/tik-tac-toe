@@ -53,6 +53,9 @@ export default function App() {
             <div className="x" style={{color:"blue"}}>O - {score[1]}</div>
           </div>
         </div>
+        <div>
+          <h4 id="msg"></h4>
+        </div>
         <div className="main">
           <div className="content">
             {mat.map((element, index) => {
