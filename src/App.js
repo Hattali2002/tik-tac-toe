@@ -8,12 +8,14 @@ export default function App() {
 
   const [mat, setMat] = useState(Array(9).fill(null));
   const [flag, setFlag] = useState(true);
+  const [allow, setAllow] = useState(true);
   const [score, setScore] = useState([0, 0]);
 
   const Reset = () => {
-    setScore([0,0]); 
+    setScore([0, 0]);
     setMat(Array(9).fill(null));
     setFlag(true);
+    setAllow(true);
   };
 
   useEffect(() => {
@@ -50,8 +52,8 @@ export default function App() {
         </div>
         <div className="score">
           <div className="dashBoard">
-            <div className="x" style={{color:"red"}}>X - {score[0]}</div>
-            <div className="x" style={{color:"blue"}}>O - {score[1]}</div>
+            <div className="x" style={{ color: "red" }}>X - {score[0]}</div>
+            <div className="x" style={{ color: "blue" }}>O - {score[1]}</div>
           </div>
         </div>
         <div>
@@ -60,7 +62,7 @@ export default function App() {
         <div className="main">
           <div className="content">
             {mat.map((element, index) => {
-              return <Grid key={index} score={score} setScore={setScore} isWon={isWon} mat={mat} ind={(ind++)} value={element} setMat={setMat} flag={flag} setFlag={setFlag} />
+              return <Grid key={index} score={score} setScore={setScore} isWon={isWon} mat={mat} ind={(ind++)} value={element} setMat={setMat} flag={flag} setFlag={setFlag} allow={allow} setAllow={setAllow}/>
             })}
           </div>
         </div>
