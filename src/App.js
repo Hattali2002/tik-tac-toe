@@ -4,21 +4,22 @@ import Grid from './Grid';
 
 export default function App() {
 
-  const [score, setScore] = useState([0, 0]);
-
-  const updateScore = () => {
-    setScore([0,0]); 
-    setMat(Array(9).fill(null));
-  };
-
-  useEffect(() => {
-    updateScore();
-    // eslint-disable-next-line
-  }, []);
+  let ind = 0;
 
   const [mat, setMat] = useState(Array(9).fill(null));
   const [flag, setFlag] = useState(true);
-  let val = 0;
+  const [score, setScore] = useState([0, 0]);
+
+  const Reset = () => {
+    setScore([0,0]); 
+    setMat(Array(9).fill(null));
+    setFlag(true);
+  };
+
+  useEffect(() => {
+    Reset();
+    // eslint-disable-next-line
+  }, []);
 
   const win = [
     [0, 1, 2],
@@ -59,16 +60,16 @@ export default function App() {
         <div className="main">
           <div className="content">
             {mat.map((element, index) => {
-              return <Grid key={index} score={score} setScore={setScore} isWon={isWon} mat={mat} val={(val++)} value={element} setMat={setMat} flag={flag} setFlag={setFlag} />
+              return <Grid key={index} score={score} setScore={setScore} isWon={isWon} mat={mat} ind={(ind++)} value={element} setMat={setMat} flag={flag} setFlag={setFlag} />
             })}
           </div>
         </div>
         <div>
-          <button className='btn' onClick={updateScore}>Rest</button>
+          <button className='btn' onClick={Reset}>Reset</button>
         </div>
       </div>
       <footer>
-        - by shiva
+        <h2>- by shiva</h2>
       </footer>
     </>
   )

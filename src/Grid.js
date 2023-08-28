@@ -1,9 +1,11 @@
 import React,{useState}  from 'react'
 
 export default function Grid(props) { 
+    const {flag,setFlag,ind,mat,setMat,setScore,score,value,isWon}=props;
+
     const [style, setStyle] = useState(null);
     const draw=()=>{
-        let array=props.mat,count=0; 
+        let array=mat,count=0; 
         for(let i=0;i<9;++i){ 
             if(array[i]==='X' || array[i]==='O'){
                count++;
@@ -13,20 +15,21 @@ export default function Grid(props) {
         return false;
     }
     const click = () => { 
-        if (props.value === null) {
-            let a = props.mat;
-            if (props.flag) {
-                a[props.val] = 'X';
+        if (value === null) {
+            let a = mat;
+            if (flag) {
+                a[ind] = 'X';
                 setStyle({ color: "red" })
             }
             else {
-                a[props.val] = 'O';
+                a[ind] = 'O';
                 setStyle({ color: "blue" })
             }
-            props.setMat(a);
-            if(props.isWon()){ 
-                let num=props.score;
-                if(props.flag){ 
+            setFlag(!flag)
+            setMat(a);
+            if(isWon()){ 
+                let num=score;
+                if(flag){ 
                     document.getElementById("msg").innerHTML="X won the game"
                     num[0]++; 
                 }
@@ -34,28 +37,28 @@ export default function Grid(props) {
                     document.getElementById("msg").innerHTML="O won the game"
                     num[1]++;
                 } 
-                props.setScore(num);
+                setScore(num);
                 setTimeout(() => {
-                    props.setMat(Array(9).fill(null));
-                }, 500);
+                    setMat(Array(9).fill(null));
+                    setFlag(true);
+                }, 500); 
             } 
             if(draw()){ 
                 document.getElementById("msg").innerHTML="match draw"
                 setTimeout(() => { 
-                    props.setMat(Array(9).fill(null));
-                }, 1000)
+                    setFlag(true);
+                    setMat(Array(9).fill(null));
+                }, 1000) 
             }  
             setTimeout(() => {
                 document.getElementById("msg").innerHTML="";
             }, 1000)
-            
-            props.setFlag(!props.flag)
         }
     }
 
     return (
         <div>
-            <button style={style} onClick={click}>{props.value}</button>
+            <button style={style} onClick={click}>{value}</button>
         </div>
     )
 }
